@@ -3,17 +3,14 @@
 #include <cctype>
 
 
-//abstract class
 class FileFilter {
 public:
-	virtual char transform(char ch) = 0;   //abstract function
-
-	void doFilter(std::fstream& file) { 
-		std::fstream in;
-		char ch;
+	virtual char transform(char ch) = 0; 
+	void doFilter(std::fstream& in, std::fstream& out) {  //filter function to be used
+		char ch;//to be used in all subclasses
 		in.get(ch);//counts spaces and goes through file
 		while (!in.eof()) {
-			file << transform(ch);
+			out << transform(ch);
 			in.get(ch);
 
 		}
@@ -29,22 +26,67 @@ public:
 	}
 	char transform(char ch) {//encryption works by changing ascii values of
 		static bool flag = false;
-		if (ch == '#' || flag) {
+		if (ch == '#') {
+			flag = true;
+			return ch;
+		}
+		else if (ch == '\n') {
+			flag = false;
+			return ch;
+		}
+		else if (flag) {
 			return ch;
 		}
 		else {
-		return ch + key;	//everything on file, adding key to the previous value
+		return ch - key;	//everything on file, adding key to the previous value
+		}
+	}
+};
+class Decrypt : public FileFilter {
+	int key;
+public:
+	Decrypt(int key) {//takes key and puts it into private int
+		this->key = key;
+	}
+	char transform(char ch) {//encryption works by changing ascii values of
+		static bool flag2 = true;
+		if (flag2 && ch!='\n') {
+			return ch;
+		}
+		else if (ch == '\n') {
+			flag2 = false;
+			return ch;
+		}
+		else {
+			return ch + key;	//everything on file, adding key to the previous value
 		}
 	}
 };
 
 void EncryptFile() {
-	std::fstream file;
+	std::fstream in,out;
 	Encrypt secure;
-	file.open("ManagerSheet.txt", std::ios::in |std::ios::out);
-	if (!file) {
-		std::cout << "\nCan't open file";
+	in.open("SecureManagerSheet.txt", std::ios::in);
+	out.open("ManagerSheet.txt", std::ios::out);
+	if (!in) {
+		std::cout << "\nCan't open in file2";
 		exit(1);
 	}
-	secure.doFilter(file);
+	if (!out) {
+		std::cout << "\nCan't open file2";
+		exit(1);
+	}
+	secure.doFilter(in,out);
+	in.close();
+	out.close();
+	remove("ManagerSheet.txt");
+}
+void DecryptFile(int key) {
+	std::fstream in, out;
+	Decrypt unlock(key);
+	in.open("SecureManagerSheet.txt", std::ios::in);
+	out.open("ManagerSheet.txt", std::ios::out);
+	unlock.doFilter(in,out);
+	in.close();
+	out.close();
 }
