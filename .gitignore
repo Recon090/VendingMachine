@@ -1,0 +1,7 @@
+#ignore all .vcxproj
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+#ignore all .vs
+*.vs
+*.sln

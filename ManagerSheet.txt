@@ -1,0 +1,49 @@
+#We as a company are proud to say we keep everything encrypted, mostly to protect your manager ID, decryption number key is 11
+Manager ID number: 1029
+
+Drink Information:
+	Drink name: Coca-Cola
+	Price: 1.50	
+	Quanitity: 6
+	Item ID: 101
+
+	Drink name: Sprite
+	Price: 1.50	
+	Quanitity: 6
+	Item ID: 102
+
+	Drink name: Fanta
+	Price: 1.50	
+	Quanitity: 6
+	Item ID: 103
+
+	Drink name: Dr.Pepper
+	Price: 1.50	
+	Quanitity: 6
+	Item ID: 104
+
+	Drink name: Redbull
+	Price: 2.00	
+	Quanitity: 6
+	Item ID: 105
+
+	Drink name: Gatorade
+	Price: 2.50	
+	Quanitity: 6
+	Item ID: 106
+
+	Drink name: Diet Coca-Cola
+	Price: 1.50	
+	Quanitity: 6
+	Item ID: 107
+
+	Drink name: Cherry Coca-Cola
+	Price: 2.00	
+	Quanitity: 6
+	Item ID: 108
+
+	Drink name: Bottle Water
+	Price: 2.75	
+	Quanitity: 6
+	Item ID: 109
+
