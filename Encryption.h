@@ -66,14 +66,14 @@ public:
 void EncryptFile() {
 	std::fstream in,out;
 	Encrypt secure;
-	in.open("SecureManagerSheet.txt", std::ios::in);
-	out.open("ManagerSheet.txt", std::ios::out);
+	in.open("ManagerSheet.txt", std::ios::in);
+	out.open("SecureManagerSheet.txt", std::ios::out);
 	if (!in) {
-		std::cout << "\nCan't open in file2";
+		std::cout << "\nCan't open in encrypt file";
 		exit(1);
 	}
 	if (!out) {
-		std::cout << "\nCan't open file2";
+		std::cout << "\nCan't open out encrypt file";
 		exit(1);
 	}
 	secure.doFilter(in,out);
@@ -86,6 +86,14 @@ void DecryptFile(int key) {
 	Decrypt unlock(key);
 	in.open("SecureManagerSheet.txt", std::ios::in);
 	out.open("ManagerSheet.txt", std::ios::out);
+	if (!in) {
+		std::cout << "\nCan't open in decrypt file";
+		exit(1);
+	}
+	if (!out) {
+		std::cout << "\nCan't open out decrypt file";
+		exit(1);
+	}
 	unlock.doFilter(in,out);
 	in.close();
 	out.close();
